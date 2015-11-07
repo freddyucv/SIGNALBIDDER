@@ -1,6 +1,6 @@
-function proccessSignal(signal){
+function proccessSignal(){
 
-  $( signal ).each(function( index ) {
+  $( this ).each(function( index ) {
       switch (index) {
         case 0:
           console.log('id', this.html);
@@ -20,6 +20,4 @@ function proccessSignal(signal){
   });
 }
 
-var robotSignals = $('#admin_signal_tripwire tbody tr');
-
-robotSignals.forEach(proccessSignal);
+$('#admin_signal_tripwire tbody tr').each(proccessSignal);
