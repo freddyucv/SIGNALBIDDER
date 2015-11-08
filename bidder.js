@@ -1,21 +1,13 @@
-var myDataRef = new Firebase('https://signalbidder.firebaseio.com/');
-myDataRef.on('child_added', function(snapshot) {
-    var message = snapshot.val();
-    //console.error(message.asset +  message.direction +  message.expiry +  message.time);
-    console.error(key);
-	//displayChatMessage(1,2,2,100,message.direction);
-});
-
-function determine_group(desc){
+function determineGroup(desc){
 	return null;
 };
 
-function submit_trade(sel,act){
+function submitTrade(sel,act){
 	$('#action').val(act);
 	sel.click();	
 };
 
-function select_item(sel,val){
+function selectItem(sel,val){
 	sel.val(val);
 	sel.change();
 };
@@ -39,6 +31,20 @@ function setTrade(grp,ast,tim,amm,direction) {
 		submit_trade(down,'put');
 	};
 };
+
+var message;
+
+$.getScript("https://cdn.firebase.com/js/client/2.2.1/firebase.js",function() {
+  console.log('##################################');
+  var myDataRef = new Firebase('https://signalbidder.firebaseio.com/signals');
+	myDataRef.on('child_added', function(snapshot) {
+    	message = snapshot.val();
+    	key = snapshot.key();
+    	//console.error();
+    	console.error(key + ' : ' + message.asset + ',' +  message.direction + ',' +  message.expiry + ',' +  message.time);
+		//displayChatMessage(1,2,2,100,message.direction);
+	});
+});
 
 
 
