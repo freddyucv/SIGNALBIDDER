@@ -69,7 +69,7 @@ function saveSignals(){
 
         $('#temp_robot_signals').append(data);
 
-        console.log('-------------------#temp_robot_signals table tbody tr ' + $('#temp_robot_signals #table tbody tr').size());
+        console.log('-------------------#temp_robot_signals table tbody tr ' + $('#temp_robot_signals table tbody tr').size());
         $('#temp_robot_signals table tbody tr').each(saveSignal);
       }
   });
