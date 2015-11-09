@@ -1,4 +1,5 @@
 function determineGroup(desc){
+	//will determine type of asset and asset to trade
 	return null;
 };
 
@@ -20,6 +21,7 @@ function setTrade(grp,ast,tim,amm,direction) {
 	up = $('#body > div > form > table > tbody > tr > td > div > div.submit > div:nth-child(1) > input[type="submit"]');
 	down = $('#body > div > form > table > tbody > tr > td > div > div.submit > div:nth-child(3) > input[type="submit"]');
 
+	//TODO: Needs to be mapped with BinaryOptions combos.
 	select_item(group,1);
 	select_item(asset,2);
 	select_item(time,2);
@@ -32,6 +34,7 @@ function setTrade(grp,ast,tim,amm,direction) {
 	};
 };
 
+//TODO: delete this
 var message;
 
 $.getScript("https://cdn.firebase.com/js/client/2.2.1/firebase.js",function() {
