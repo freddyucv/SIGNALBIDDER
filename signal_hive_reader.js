@@ -74,11 +74,7 @@ function saveSignals(){
       url: "components/manual-signals-json.php",
       cache: false,
       success: function(data){
-        console.log('manual ' + data);
-        console.log('-------------------#temp_manual_signal ' + $('#temp_manual_signals').size());
         $('#temp_manual_signals').append(data);
-
-        console.log('-------------------#temp_manual_signal table tbody tr ' + $('#temp_manual_signals table tbody tr').size());
         $('#temp_manual_signals table tbody tr').each(saveSignal);
       }
   });
@@ -90,7 +86,6 @@ $('body').append('<div id="temp_robot_signals" style="display:none"></div>');
 $('body').append('<div id="temp_manual_signals" style="display:none"></div>');
 
 $.getScript("https://cdn.firebase.com/js/client/2.3.1/firebase.js",function() {
-  console.log('--------------------------------------');
   signalsFirebase = new Firebase('https://signalbidder.firebaseio.com/signals');
   saveSignals();
 });
