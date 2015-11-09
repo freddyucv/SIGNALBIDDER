@@ -56,9 +56,11 @@ function saveSignal(){
 }
 
 function saveSignals(){
+  if (currentSignals && currentSignals.length > 0){
+    localStorage.setItem("signals", JSON.stringify(currentSignals));
+  }
+
   beforeSignal = localStorage.signals ? JSON.parse(localStorage.signals) : [];
-  console.log('------', beforeSignal);
-  localStorage.setItem("signals", JSON.stringify(currentSignals));
   currentSignals = [];
 
   $.ajax({
