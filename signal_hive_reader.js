@@ -64,7 +64,12 @@ function saveSignals(){
       url: "components/signals-json.php",
       cache: false,
       success: function(data){
+        console.log('-------------------robot ' + data);
+        console.log('-------------------#temp_robot_signals ' + $('#temp_robot_signals').size());
+
         $('#temp_robot_signals').append(data);
+
+        console.log('-------------------#temp_robot_signals #table tbody tr ' + $('#temp_robot_signals #table tbody tr').size());
         $('#temp_robot_signals #table tbody tr').each(saveSignal);
       }
   });
@@ -74,6 +79,7 @@ function saveSignals(){
       url: "components/manual-signals-json.php",
       cache: false,
       success: function(data){
+        console.log('manual ' + data);
         $('#temp_manual_signal').append(data);
         $('#temp_manual_signal #table tbody tr').each(saveSignal);
       }
