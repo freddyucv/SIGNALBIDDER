@@ -54,15 +54,16 @@ function saveSignals(){
   beforeSignal = currentSignals;
   currentSignals = [];
 
+
   var robot_signal_form_data = $("#robot_signal_form").serialize();
 
   $.ajax({
       type: "POST",
-      url: "components/signals-json.php",      
+      url: "components/signals-json.php",
       data: robot_signal_form_data,
       async: true,
       cache: false,
-      timeout:5000, /* Timeout in ms */
+      timeout:5000,
       success: function(data){
         console.log('robot', data);
       }
@@ -75,7 +76,7 @@ function saveSignals(){
       data: singal_form_data,
       async: true,
       cache: false,
-      timeout:5000, /* Timeout in ms */
+      timeout:5000,
       success: function(data){
         console.log('manual', data);
       }
@@ -83,8 +84,8 @@ function saveSignals(){
 /*
   $('#admin_signal_tripwire tbody tr').each(saveSignal);
   $('#manual_signal_tripwire tbody tr').each(saveSignal);
-
-  setTimeout(saveSignals, 1000);*/
+*/
+  setTimeout(saveSignals, 3000);
 }
 
 $.getScript("https://cdn.firebase.com/js/client/2.3.1/firebase.js",function() {
