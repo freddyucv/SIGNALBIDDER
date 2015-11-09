@@ -1,3 +1,21 @@
+var group = $('.group > span:nth-child(1) > select:nth-child(3)');
+var	asset = $('#body > div > form > table > thead > tr > th.type.arrow.step.gray > span > select');
+var set = {};
+
+function extractAssetsSets(){	
+	group.find('option').each(function() {    
+		//alert('Value: ' + $(this).val() + ' Text: ' + $(this).text());	
+		group.val($(this).val());
+		var groupID = $(this).val();
+		group.change();
+		asset.find('option').each(function() {
+			alert('Asset: ' + $(this).text() + ' gid: ' + groupID + ' aid: ' + $(this).val());	
+			//set[$(this).text()] = {gid: groupID, aid: $(this).val()}
+		})
+		//set[$(this).val()]
+	})
+}
+
 function determineGroup(desc){
 	//will determine type of asset and asset to trade
 	return null;
@@ -14,8 +32,6 @@ function selectItem(sel,val){
 };
 
 function setTrade(grp,ast,tim,amm,direction) {
-	group = $('.group > span:nth-child(1) > select:nth-child(3)');
-	asset = $('#body > div > form > table > thead > tr > th.type.arrow.step.gray > span > select');
 	time = $('.duration > span:nth-child(1) > select:nth-child(3)');
 	ammount = $('.amount > span:nth-child(1) > select:nth-child(3)');
 	up = $('#body > div > form > table > tbody > tr > td > div > div.submit > div:nth-child(1) > input[type="submit"]');
@@ -48,6 +64,7 @@ $.getScript("https://cdn.firebase.com/js/client/2.2.1/firebase.js",function() {
 		//displayChatMessage(1,2,2,100,message.direction);
 	});
 });
+
 
 
 
