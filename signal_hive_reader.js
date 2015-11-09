@@ -46,7 +46,7 @@ function saveSignal(){
     }
   });
 
-  signal.status = none;
+  signal.status = 'none';
 
   if (!contains(beforeSignal, signal)){
     signalsFirebase.push(signal);
