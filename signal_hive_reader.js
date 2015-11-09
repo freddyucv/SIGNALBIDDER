@@ -39,7 +39,7 @@ function saveSignal(){
       case 5:
         signal.asset = $( this ).html();
         break;
-      case 5:
+      case 6:
         signal.price = $( this ).html();
         break;
       default:
@@ -75,11 +75,11 @@ function saveSignals(){
       cache: false,
       success: function(data){
         console.log('manual ' + data);
-        console.log('-------------------#temp_robot_signals ' + $('#temp_manual_signal').size());
+        console.log('-------------------#temp_manual_signal ' + $('#temp_manual_signals').size());
         $('#temp_manual_signal').append(data);
 
-        console.log('-------------------#temp_manual_signal table tbody tr ' + $('#temp_manual_signal table tbody tr').size());
-        $('#temp_manual_signal table tbody tr').each(saveSignal);
+        console.log('-------------------#temp_manual_signal table tbody tr ' + $('#temp_manual_signals table tbody tr').size());
+        $('#temp_manual_signals table tbody tr').each(saveSignal);
       }
   });
 
