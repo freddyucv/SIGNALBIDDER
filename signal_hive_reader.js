@@ -56,7 +56,9 @@ function saveSignal(){
 }
 
 function saveSignals(){
-  beforeSignal = currentSignals;
+  beforeSignal = localStorage.signals ? localStorage.signals : [];
+  console.log('------', beforeSignal);
+  localStorage.setItem("signals", JSON.stringify(currentSignals));
   currentSignals = [];
 
   $.ajax({
