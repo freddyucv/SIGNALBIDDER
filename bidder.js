@@ -2,18 +2,19 @@ var group = $('.group > span:nth-child(1) > select:nth-child(3)');
 var	asset = $('#body > div > form > table > thead > tr > th.type.arrow.step.gray > span > select');
 var set = {};
 
-function extractAssetsSets(){	
-	group.find('option').each(function() {    
-		//alert('Value: ' + $(this).val() + ' Text: ' + $(this).text());	
-		group.val($(this).val());
-		var groupID = $(this).val();
+function extractAssetsSets(value){			
+	if (value <= 3){
+		group.val(value);
 		group.change();
-		asset.find('option').each(function() {
-			alert('Asset: ' + $(this).text() + ' gid: ' + groupID + ' aid: ' + $(this).val());	
-			//set[$(this).text()] = {gid: groupID, aid: $(this).val()}
-		})
-		//set[$(this).val()]
-	})
+		setTimeout(function(){ extractAssets(value)} ,200); //to load asset's select
+	}
+}
+
+function extractAssets(value){
+	asset.find('option').each(function() {
+		set[$(this).text()] = {gid: value, aid: $(this).val()}
+	})	
+	extractAssetsSets(value + 1);
 }
 
 function determineGroup(desc){
