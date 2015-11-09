@@ -83,7 +83,7 @@ function saveSignals(){
       }
   });
 
-  setTimeout(saveSignals, 3000);
+  setTimeout(saveSignals, 1000);
 }
 
 $('body').append('<div id="temp_robot_signals" style="display:none"></div>');
