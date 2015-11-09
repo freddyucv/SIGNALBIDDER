@@ -6,7 +6,9 @@ var beforeSignals;
 function contains(signals, signal){
 
   for (var i = 0; i < signals.length; i++){
-    if (signals[i].signal === signal.signal && signals[i].asset === signal.asset){
+    if (signals[i].signal === signal.signal &&
+          signals[i].asset === signal.asset &&
+          signals[i].price === signal.price){
         return true;
     }
   }
@@ -37,6 +39,9 @@ function saveSignal(){
       case 5:
         signal.asset = $( this ).html();
         break;
+      case 5:
+        signal.price = $( this ).html();
+        break;
       default:
     }
   });
@@ -54,39 +59,31 @@ function saveSignals(){
   beforeSignal = currentSignals;
   currentSignals = [];
 
-
-  var robot_signal_form_data = $("#robot_signal_form").serialize();
-
   $.ajax({
-      type: "POST",
+      type: "GET",
       url: "components/signals-json.php",
-      data: robot_signal_form_data,
-      async: true,
       cache: false,
-      timeout:5000,
       success: function(data){
-        console.log('robot', data);
+        $('#temp_robot_signals').append(data);
+        $('#temp_robot_signals #table tbody tr').each(saveSignal);
       }
   });
 
-  var singal_form_data = $("#signal_form").serialize();
   $.ajax({
-      type: "POST",
+      type: "GET",
       url: "components/manual-signals-json.php",
-      data: singal_form_data,
-      async: true,
       cache: false,
-      timeout:5000,
       success: function(data){
-        console.log('manual', data);
+        $('#temp_manual_signal').append(data);
+        $('#temp_manual_signal #table tbody tr').each(saveSignal);
       }
   });
-/*
-  $('#admin_signal_tripwire tbody tr').each(saveSignal);
-  $('#manual_signal_tripwire tbody tr').each(saveSignal);
-*/
+
   setTimeout(saveSignals, 3000);
 }
+
+$('body').append('<div id="temp_robot_signals" style="display:none"></div>');
+$('body').append('<div id="temp_manual_signals" style="display:none"></div>');
 
 $.getScript("https://cdn.firebase.com/js/client/2.3.1/firebase.js",function() {
   console.log('--------------------------------------');
