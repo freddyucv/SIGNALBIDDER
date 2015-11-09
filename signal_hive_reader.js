@@ -76,7 +76,7 @@ function saveSignals(){
       success: function(data){
         console.log('manual ' + data);
         console.log('-------------------#temp_manual_signal ' + $('#temp_manual_signals').size());
-        $('#temp_manual_signal').append(data);
+        $('#temp_manual_signals').append(data);
 
         console.log('-------------------#temp_manual_signal table tbody tr ' + $('#temp_manual_signals table tbody tr').size());
         $('#temp_manual_signals table tbody tr').each(saveSignal);
