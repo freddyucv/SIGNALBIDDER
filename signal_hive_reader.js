@@ -69,8 +69,8 @@ function saveSignals(){
 
         $('#temp_robot_signals').append(data);
 
-        console.log('-------------------#temp_robot_signals #table tbody tr ' + $('#temp_robot_signals #table tbody tr').size());
-        $('#temp_robot_signals #table tbody tr').each(saveSignal);
+        console.log('-------------------#temp_robot_signals table tbody tr ' + $('#temp_robot_signals #table tbody tr').size());
+        $('#temp_robot_signals table tbody tr').each(saveSignal);
       }
   });
 
@@ -81,7 +81,7 @@ function saveSignals(){
       success: function(data){
         console.log('manual ' + data);
         $('#temp_manual_signal').append(data);
-        $('#temp_manual_signal #table tbody tr').each(saveSignal);
+        $('#temp_manual_signal table tbody tr').each(saveSignal);
       }
   });
 
