@@ -57,7 +57,7 @@ function saveSignal(){
 function saveSignals(){
   if (beforeSignals && beforeSignals.length > 0){
     var aux =  beforeSignals.filter(function(signal){
-      return signal.createdTime < (7 * 24 * 60 * 60 * 1000);
+      return signal.createdTime > (7 * 24 * 60 * 60 * 1000);
     });
     beforeSignals = aux;
     localStorage.setItem("signals", JSON.stringify(beforeSignals));
