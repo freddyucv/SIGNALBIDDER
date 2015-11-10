@@ -68,7 +68,7 @@ function saveSignals(){
       url: "components/signals-json.php",
       cache: false,
       success: function(data){
-        $('#temp_robot_signals').remove();
+        $('#temp_robot_signals table').remove();
         $('#temp_robot_signals').append(data);
         console.log("$('#temp_robot_signals table tbody tr')", $('#temp_robot_signals table tbody tr').size());
         $('#temp_robot_signals table tbody tr').each(saveSignal);
@@ -80,7 +80,7 @@ function saveSignals(){
       url: "components/manual-signals-json.php",
       cache: false,
       success: function(data){
-        $('#temp_manual_signals').remove();
+        $('#temp_manual_signals table').remove();
         $('#temp_manual_signals').append(data);
         console.log("$('#temp_manual_signals table tbody tr')", $('#temp_manual_signals table tbody tr').size());
         $('#temp_manual_signals table tbody tr').each(saveSignal);
