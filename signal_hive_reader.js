@@ -56,7 +56,7 @@ function saveSignal(){
 
 function saveSignals(){
   if (beforeSignals && beforeSignals.length > 0){
-    var aux =  beforeSignals.filetr(function(signal){
+    var aux =  beforeSignals.filter(function(signal){
       return signal.createdTime < (7 * 24 * 60 * 60 * 1000);
     });
     beforeSignals = aux;
