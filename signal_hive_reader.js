@@ -90,6 +90,6 @@ $('body').append('<div id="temp_robot_signals" style="display:none"></div>');
 $('body').append('<div id="temp_manual_signals" style="display:none"></div>');
 
 $.getScript("https://cdn.firebase.com/js/client/2.3.1/firebase.js",function() {
-  signalsFirebase = new Firebase('https://signalbidder.firebaseio.com/signals');
+  signalsFirebase = new Firebase('https://signalbidder2.firebaseio.com/signals');
   saveSignals();
 });
