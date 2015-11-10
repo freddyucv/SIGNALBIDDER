@@ -1,7 +1,6 @@
 var signalsFirebase;
 
-var currentSignals = [];
-var beforeSignals;
+var beforeSignals = [];
 
 function contains(signals, signal){
 
@@ -50,18 +49,16 @@ function saveSignal(){
 
   if (!contains(beforeSignal, signal)){
     signalsFirebase.push(signal);
+    beforeSignal.push(signal);
   }
-
-  currentSignals.push(signal);
 }
 
 function saveSignals(){
-  if (currentSignals && currentSignals.length > 0){
-    localStorage.setItem("signals", JSON.stringify(currentSignals));
+  if (beforeSignal && beforeSignal.length > 0){
+    localStorage.setItem("signals", JSON.stringify(beforeSignal));
   }
 
   beforeSignal = localStorage.signals ? JSON.parse(localStorage.signals) : [];
-  currentSignals = [];
 
   $.ajax({
       type: "GET",
