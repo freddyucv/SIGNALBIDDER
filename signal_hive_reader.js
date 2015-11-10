@@ -50,11 +50,16 @@ function saveSignal(){
   if (!contains(beforeSignals, signal)){
     signalsFirebase.push(signal);
     beforeSignals.push(signal);
+    signal.createdTime = new Date().getTime();
   }
 }
 
 function saveSignals(){
   if (beforeSignals && beforeSignals.length > 0){
+    var aux =  beforeSignals.filetr(function(signal){
+      return signal.createdTime < (7 * 24 * 60 * 60 * 1000);
+    });
+    beforeSignals = aux;
     localStorage.setItem("signals", JSON.stringify(beforeSignals));
   }else if(localStorage.signals){
     beforeSignals = JSON.parse(localStorage.signals);
@@ -67,7 +72,6 @@ function saveSignals(){
       success: function(data){
         $('#temp_robot_signals table').remove();
         $('#temp_robot_signals').append(data);
-        console.log("$('#temp_robot_signals table tbody tr')", $('#temp_robot_signals table tbody tr').size());
         $('#temp_robot_signals table tbody tr').each(saveSignal);
       }
   });
@@ -79,7 +83,6 @@ function saveSignals(){
       success: function(data){
         $('#temp_manual_signals table').remove();
         $('#temp_manual_signals').append(data);
-        console.log("$('#temp_manual_signals table tbody tr')", $('#temp_manual_signals table tbody tr').size());
         $('#temp_manual_signals table tbody tr').each(saveSignal);
       }
   });
