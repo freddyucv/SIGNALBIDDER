@@ -47,18 +47,18 @@ function saveSignal(){
 
   signal.status = 'none';
 
-  if (!contains(beforeSignal, signal)){
+  if (!contains(beforeSignals, signal)){
     signalsFirebase.push(signal);
-    beforeSignal.push(signal);
+    beforeSignals.push(signal);
   }
 }
 
 function saveSignals(){
-  if (beforeSignal && beforeSignal.length > 0){
-    localStorage.setItem("signals", JSON.stringify(beforeSignal));
+  if (beforeSignals && beforeSignals.length > 0){
+    localStorage.setItem("signals", JSON.stringify(beforeSignals));
+  }else if(localStorage.signals){
+    beforeSignals = JSON.parse(localStorage.signals);
   }
-
-  beforeSignal = localStorage.signals ? JSON.parse(localStorage.signals) : [];
 
   $.ajax({
       type: "GET",
