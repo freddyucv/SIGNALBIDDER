@@ -26,7 +26,7 @@ function prepareGroupSelect(value){
 	if (value <= 3){
 		group.val(value);
 		group.change();
-		setTimeout(function(){ extractAssets(value)} ,200); //to load asset's select
+		setTimeout(function(){ extractAssets(value)} ,400); //to load asset's select
 	}
 }
 
@@ -34,12 +34,12 @@ function extractAssets(value){
 	asset.find('option').each(function() {
 		set[$(this).text()] = {gid: value, aid: $(this).val()}
 	})	
-	extractAssetsSets(value + 1);
+	prepareGroupSelect(value + 1);
 }
 
 function getBOAsset(hiveAsset){
 	var asst = set[hiveAsset];
-	if(typeof a === 'undefined'){
+	if(typeof asst === 'undefined'){
   	  return -1;
 	} else {
 		return asst;
@@ -64,29 +64,36 @@ function setTrade(ast,tim,direction) {
 
 	asst = getBOAsset(ast);
 	t = getTimeVal(tim);
-	if (t == -1) || (asst == -1){
+	console.log("asset: " + ast + " time: " + tim);
+	console.log("asset: " + asst + " time: " + t);
+	if (t == -1 || asst == -1){
 		return -1;
 	} else {
-		select_item(group,set[ast].gid);
-		select_item(asset,set[ast].aid);
-		select_item(time,t);
-	}
+		selectItem(group,asst.gid);
+		selectItem(asset,asst.aid);
+		selectItem(time,t);
+	};
 	//select_item(ammount,ammount,val());
 	
 	if (direction.localeCompare('up') == 0){ 
-		submit_trade(up,'call');
+		submitTrade(up,'call');
 	} else { 
-		submit_trade(down,'put');
+		submitTrade(down,'put');
 	};
 };
 
 $.getScript("https://cdn.firebase.com/js/client/2.2.1/firebase.js",function() {
-  var firebaseRef = new Firebase('https://signalbidder.firebaseio.com/signals');
+  var firebaseRef = new Firebase('https://signalbidder2.firebaseio.com/signals');
 	firebaseRef.on('child_added', function(snapshot) {
     	message = snapshot.val();
     	key = snapshot.key();    	    	
-    	if (setTrade(message.asset,message.expiry,message.direction) == -1){
+    	trade = setTrade(message.asset,message.expiry,message.direction);
+    	if ( trade == -1){
     		//Set status to not trade
+    		console.error("Unsuccessful trade!");
+    		console.log(message);
+    	} else {
+    		console.log("Successful trade!");    		
     	};
 	});
 });
