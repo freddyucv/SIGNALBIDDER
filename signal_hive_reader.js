@@ -72,6 +72,7 @@ function saveSignals(){
       success: function(data){
         $('#temp_robot_signals table').remove();
         $('#temp_robot_signals').append(data);
+        console.log('Robot signals: ', $('#temp_robot_signals table tbody tr').size());
         $('#temp_robot_signals table tbody tr').each(saveSignal);
       }
   });
@@ -83,6 +84,7 @@ function saveSignals(){
       success: function(data){
         $('#temp_manual_signals table').remove();
         $('#temp_manual_signals').append(data);
+        console.log('Manual signals: ', $('#temp_manual_signals table tbody tr').size());
         $('#temp_manual_signals table tbody tr').each(saveSignal);
       }
   });
