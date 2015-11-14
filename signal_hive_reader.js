@@ -1,7 +1,6 @@
 var signalsFirebase;
 
-var currentSignals = [];
-var beforeSignals;
+var beforeSignals = [];
 
 function contains(signals, signal){
 
@@ -48,26 +47,30 @@ function saveSignal(){
 
   signal.status = 'none';
 
-  if (!contains(beforeSignal, signal)){
+  if (!contains(beforeSignals, signal)){
     signalsFirebase.push(signal);
+    beforeSignals.push(signal);
+    signal.createdTime = new Date().getTime();
   }
-
-  currentSignals.push(signal);
 }
 
 function saveSignals(){
-  if (currentSignals && currentSignals.length > 0){
-    localStorage.setItem("signals", JSON.stringify(currentSignals));
+  if (beforeSignals && beforeSignals.length > 0){
+    var aux =  beforeSignals.filter(function(signal){
+      return signal.createdTime > (7 * 24 * 60 * 60 * 1000);
+    });
+    beforeSignals = aux;
+    localStorage.setItem("signals", JSON.stringify(beforeSignals));
+  }else if(localStorage.signals){
+    beforeSignals = JSON.parse(localStorage.signals);
   }
-
-  beforeSignal = localStorage.signals ? JSON.parse(localStorage.signals) : [];
-  currentSignals = [];
 
   $.ajax({
       type: "GET",
       url: "components/signals-json.php",
       cache: false,
       success: function(data){
+        $('#temp_robot_signals table').remove();
         $('#temp_robot_signals').append(data);
         $('#temp_robot_signals table tbody tr').each(saveSignal);
       }
@@ -78,6 +81,7 @@ function saveSignals(){
       url: "components/manual-signals-json.php",
       cache: false,
       success: function(data){
+        $('#temp_manual_signals table').remove();
         $('#temp_manual_signals').append(data);
         $('#temp_manual_signals table tbody tr').each(saveSignal);
       }
@@ -90,6 +94,6 @@ $('body').append('<div id="temp_robot_signals" style="display:none"></div>');
 $('body').append('<div id="temp_manual_signals" style="display:none"></div>');
 
 $.getScript("https://cdn.firebase.com/js/client/2.3.1/firebase.js",function() {
-  signalsFirebase = new Firebase('https://signalbidder.firebaseio.com/signals');
+  signalsFirebase = new Firebase('https://signalbidder2.firebaseio.com/signals');
   saveSignals();
 });
