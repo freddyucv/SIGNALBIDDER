@@ -70,7 +70,7 @@ function setTrade(ast,tim,direction) {
 	};
 }
 function update_signal(id,value){
-	signalRef = new Firebase('https://signalbidder2.firebaseio.com/signals/' + id);
+	signalRef = new Firebase('https://signalbidder3.firebaseio.com/signals/' + id);
 	signalRef.update({status: value});
 }
 function keep_alive() {
@@ -88,8 +88,11 @@ function keep_alive() {
 			});
 		}, type: "GET", url: "/source/script_excl/graph.php"});
 }
+
+prepareGroupSelect(1);
+
 $.getScript("https://cdn.firebase.com/js/client/2.2.1/firebase.js",function() {
-  var firebaseRef = new Firebase('https://signalbidder2.firebaseio.com/signals');
+  var firebaseRef = new Firebase('https://signalbidder3.firebaseio.com/signals');
 	firebaseRef.on('child_added', function(snapshot) {
     	message = snapshot.val();
     	key = snapshot.key();
