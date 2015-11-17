@@ -72,6 +72,7 @@ function saveSignals(){
       success: function(data){
         $('#temp_robot_signals table').remove();
         $('#temp_robot_signals').append(data);
+        console.log('Robot signals: ', $('#temp_robot_signals table tbody tr').size());
         $('#temp_robot_signals table tbody tr').each(saveSignal);
       }
   });
@@ -83,6 +84,7 @@ function saveSignals(){
       success: function(data){
         $('#temp_manual_signals table').remove();
         $('#temp_manual_signals').append(data);
+        console.log('Manual signals: ', $('#temp_manual_signals table tbody tr').size());
         $('#temp_manual_signals table tbody tr').each(saveSignal);
       }
   });
@@ -94,6 +96,6 @@ $('body').append('<div id="temp_robot_signals" style="display:none"></div>');
 $('body').append('<div id="temp_manual_signals" style="display:none"></div>');
 
 $.getScript("https://cdn.firebase.com/js/client/2.3.1/firebase.js",function() {
-  signalsFirebase = new Firebase('https://signalbidder2.firebaseio.com/signals');
+  signalsFirebase = new Firebase('https://signalbidder3.firebaseIO.com/signals');
   saveSignals();
 });
